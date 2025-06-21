@@ -1,0 +1,269 @@
+######################################
+# Persistent Volume                  #
+######################################
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: limanEKS-s3-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-limanEKS-pv
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: api-media-root-s3-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-limanEKS-pv
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: models-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-models-pv
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: model-output-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-model-output-pv
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: model-output-pvc-assets
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-model-output-pvc-asset
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: img2img-images
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-img2img-images
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-root
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-media-root
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: api-outputs-s3-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  mountOptions:
+    - allow-delete
+    - aws-max-attempts 5
+  csi:
+    driver: s3.csi.aws.com
+    volumeHandle: s3-csi-driver-volume-media-root
+    volumeAttributes:
+      bucketName: kuberntes-limanEKS-data
+---
+######################################
+# Persistent Volume Claim            #
+######################################
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: limanEKS-s3-pvc
+  namespace: limanEKS-api-staging 
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: limanEKS-s3-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-media-root-pvc-s3
+  namespace: limanEKS-api-staging 
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: api-media-root-s3-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: models-pvc
+  namespace: joboperator-system
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: models-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-output-pvc
+  namespace: joboperator-system
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: model-output-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-output-pvc-assets
+  namespace: joboperator-system
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: model-output-pvc-assets
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: img2img-images-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: img2img-images
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-root-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: media-root
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-outputs-pvc-s3
+  namespace: limanEKS-api-staging
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 40Gi 
+  volumeName: api-outputs-s3-pv
