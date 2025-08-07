@@ -17,6 +17,7 @@
 #   }
 
 #   tags = {
-#     Name = "Moonlite DynamoDB Terraform State Lock"
+#     Name = "DynamoDB Terraform State Lock"
 #   }
 # }
+
