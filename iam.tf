@@ -61,22 +61,3 @@ module "mountpoint_s3_csi_driver_irsa" {
 
   force_detach_policies = true
 }
-
-module "github_oidc_provider" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-github-oidc-provider"
-}
-
-module "github_oidc_role" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-github-oidc-role"
-
-  name = "github-actions-oidc-role"
-
-  subjects = [
-    "repo:Moonlite-Media/*:*"
-  ]
-
-  policies = {
-    ECRAccess = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess",
-    EKSClusterPolicy = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  }
-}
