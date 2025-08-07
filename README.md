@@ -9,7 +9,7 @@
 </div>
 
 <p align="center">
-  <strong>A comprehensive tofu configuration for deploying and managing MoonliteLabs Amazon Elastic Kubernetes Service (EKS) clusters with essential add-ons and configurations.</strong>
+  <strong>A comprehensive tofu configuration for deploying and managing Amazon Elastic Kubernetes Service (EKS) clusters with essential add-ons and configurations.</strong>
 </p>
 
 ---
@@ -90,7 +90,7 @@ AWS credentials must have permissions for:
 
 1. **Clone the repository**
    ```bash
-   git clone git@github.com:Moonlite-Media/tofuEKS.git
+   git clone https://github.com/limanalhassan/terraformEKS-automode.git
    cd terraformEKS
    ```
 
